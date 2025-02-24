@@ -1,0 +1,52 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the numerator: ");
+        string numeratorInput = Console.ReadLine();
+
+        Console.Write("Enter the denominator: ");
+        string denominatorInput = Console.ReadLine();
+
+        try
+        {
+            // Attempt to convert inputs to integers
+            int numerator = Convert.ToInt32(numeratorInput);
+            int denominator = Convert.ToInt32(denominatorInput);
+
+            // Perform division
+            double result = DivideNumbers(numerator, denominator);
+            Console.WriteLine($"The result of {numerator} / {denominator} is: {result}");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine("Error: Please enter valid numeric values.");
+            Console.WriteLine($"Exception Details: {ex.Message}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine("Error: Cannot divide by zero.");
+            Console.WriteLine($"Exception Details: {ex.Message}");
+        }
+        catch (OverflowException ex)
+        {
+            Console.WriteLine("Error: The number entered is too large or too small.");
+            Console.WriteLine($"Exception Details: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An unexpected error occurred.");
+            Console.WriteLine($"Exception Details: {ex.Message}");
+        }
+
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
+    }
+
+    static double DivideNumbers(int num, int denom)
+    {
+        return (double)num / denom; // Cast to double to allow decimal results
+    }
+}
